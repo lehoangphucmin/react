@@ -12,7 +12,7 @@
  * @lightSyntaxTransform
  * @preventMunge
  * @oncall react_core
- * @generated SignedSource<<3e583580e8ea4cef322310e3c4cd65b8>>
+ * @generated SignedSource<<d4547884e54a1560ff77910a396abc74>>
  */
 
 'use strict';
@@ -37015,7 +37015,8 @@ function codegenInstructionValue(cx, instrValue) {
                     switch (property.type) {
                         case 'property': {
                             const value = codegenPlaceToExpression(cx, property.place);
-                            properties.push(libExports$1.objectProperty(key, value, property.key.kind === 'computed', key.type === 'Identifier' &&
+                            properties.push(libExports$1.objectProperty(key, value, property.key.kind === 'computed', property.key.kind !== 'computed' &&
+                                key.type === 'Identifier' &&
                                 value.type === 'Identifier' &&
                                 value.name === key.name));
                             break;
@@ -37467,7 +37468,8 @@ function codegenLValue(cx, pattern) {
                 if (property.kind === 'ObjectProperty') {
                     const key = codegenObjectPropertyKey(cx, property.key);
                     const value = codegenLValue(cx, property.place);
-                    return libExports$1.objectProperty(key, value, property.key.kind === 'computed', key.type === 'Identifier' &&
+                    return libExports$1.objectProperty(key, value, property.key.kind === 'computed', property.key.kind !== 'computed' &&
+                        key.type === 'Identifier' &&
                         value.type === 'Identifier' &&
                         value.name === key.name);
                 }
