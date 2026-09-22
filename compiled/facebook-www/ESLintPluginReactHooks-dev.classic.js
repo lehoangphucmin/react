@@ -36968,7 +36968,8 @@ function codegenInstructionValue(cx, instrValue) {
                     switch (property.type) {
                         case 'property': {
                             const value = codegenPlaceToExpression(cx, property.place);
-                            properties.push(libExports$1.objectProperty(key, value, property.key.kind === 'computed', key.type === 'Identifier' &&
+                            properties.push(libExports$1.objectProperty(key, value, property.key.kind === 'computed', property.key.kind !== 'computed' &&
+                                key.type === 'Identifier' &&
                                 value.type === 'Identifier' &&
                                 value.name === key.name));
                             break;
@@ -37420,7 +37421,8 @@ function codegenLValue(cx, pattern) {
                 if (property.kind === 'ObjectProperty') {
                     const key = codegenObjectPropertyKey(cx, property.key);
                     const value = codegenLValue(cx, property.place);
-                    return libExports$1.objectProperty(key, value, property.key.kind === 'computed', key.type === 'Identifier' &&
+                    return libExports$1.objectProperty(key, value, property.key.kind === 'computed', property.key.kind !== 'computed' &&
+                        key.type === 'Identifier' &&
                         value.type === 'Identifier' &&
                         value.name === key.name);
                 }
